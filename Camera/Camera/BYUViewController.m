@@ -10,6 +10,7 @@
 
 
 @interface BYUViewController ()
+@property (nonatomic, retain) NSMutableArray *capturedImages;
 
 @end
 
@@ -39,10 +40,10 @@
 }
 
 - (IBAction)takePicture:(id)sender {
-    CameraViewController *imagePicker = [[CameraViewController alloc] init];
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     
     //if the device has a camera, then take a picture, else pick one from photo library
-    if([CameraViewController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
         
@@ -74,7 +75,19 @@
         image = seletctedImage;
     }
     
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-    
+    if (self.capturedImages.count == 0)
+    {
+        NSLog(@"image stored at 0");
+        NSLog(@"%i",self.capturedImages.count);
+        [self.capturedImages addObject:image];
+        NSLog(@"%i",self.capturedImages.count);
+        UIImageWriteToSavedPhotosAlbum(self.capturedImages[0], nil, nil, nil);
+    }
+    else
+    {
+        [self.capturedImages addObject:image];
+        image = self.capturedImages[0];
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
 }
 @end
