@@ -14,19 +14,24 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2e-7e-Riu">
                                 <items>
-                                    <barButtonItem title="Item" systemItem="camera" id="gaS-sp-k0o">
+                                    <barButtonItem systemItem="camera" id="gaS-sp-k0o">
                                         <connections>
                                             <action selector="takePicture:" destination="2" id="Iig-Nj-Dm6"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEp-DE-NhB"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IEp-DE-NhB" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="CCo-Bs-YKF"/>
+                            <constraint firstItem="IEp-DE-NhB" firstAttribute="bottom" secondItem="t2e-7e-Riu" secondAttribute="top" type="default" id="XNQ-XC-GTB"/>
+                            <constraint firstItem="IEp-DE-NhB" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="aiM-eh-zTN"/>
                             <constraint firstItem="t2e-7e-Riu" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="d47-uV-QIg"/>
                             <constraint firstItem="t2e-7e-Riu" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="ep8-Si-L7M"/>
                             <constraint firstItem="t2e-7e-Riu" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="eqh-H2-Xb0"/>
+                            <constraint firstItem="IEp-DE-NhB" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="zFS-QW-kRU"/>
                         </constraints>
                     </view>
                 </viewController>

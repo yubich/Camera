@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CameraViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface BYUViewController : UIViewController
-<UINavigationBarDelegate,UIImagePickerControllerDelegate>
+@interface BYUViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 - (IBAction)takePicture:(id)sender;
 
 @end

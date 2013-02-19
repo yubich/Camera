@@ -23,6 +23,9 @@
 		524A350A16C9D3A1009588EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E516C9D3A0009588EF /* Foundation.framework */; };
 		524A351216C9D3A1009588EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 524A351016C9D3A1009588EF /* InfoPlist.strings */; };
 		524A351516C9D3A1009588EF /* CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 524A351416C9D3A1009588EF /* CameraTests.m */; };
+		52AF572516CC885E006F3DDB /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AF572416CC885E006F3DDB /* CameraViewController.m */; };
+		52C2DB5116CD61BA00FE37EE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */; };
+		52E852A816D3253A00E6EDA9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E852A716D3253A00E6EDA9 /* sample.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,10 @@
 		524A351116C9D3A1009588EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		524A351316C9D3A1009588EF /* CameraTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraTests.h; sourceTree = "<group>"; };
 		524A351416C9D3A1009588EF /* CameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraTests.m; sourceTree = "<group>"; };
+		52AF572316CC885E006F3DDB /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		52AF572416CC885E006F3DDB /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		52E852A716D3253A00E6EDA9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C2DB5116CD61BA00FE37EE /* MobileCoreServices.framework in Frameworks */,
 				524A34E416C9D3A0009588EF /* UIKit.framework in Frameworks */,
 				524A34E616C9D3A0009588EF /* Foundation.framework in Frameworks */,
 				524A34E816C9D3A0009588EF /* CoreGraphics.framework in Frameworks */,
@@ -106,6 +114,7 @@
 		524A34E216C9D3A0009588EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */,
 				524A34E316C9D3A0009588EF /* UIKit.framework */,
 				524A34E516C9D3A0009588EF /* Foundation.framework */,
 				524A34E716C9D3A0009588EF /* CoreGraphics.framework */,
@@ -119,9 +128,12 @@
 			children = (
 				524A34F216C9D3A0009588EF /* BYUAppDelegate.h */,
 				524A34F316C9D3A0009588EF /* BYUAppDelegate.m */,
+				52AF572316CC885E006F3DDB /* CameraViewController.h */,
+				52AF572416CC885E006F3DDB /* CameraViewController.m */,
 				524A34FB16C9D3A0009588EF /* MainStoryboard.storyboard */,
 				524A34FE16C9D3A0009588EF /* BYUViewController.h */,
 				524A34FF16C9D3A1009588EF /* BYUViewController.m */,
+				52E852A716D3253A00E6EDA9 /* sample.png */,
 				524A34EA16C9D3A0009588EF /* Supporting Files */,
 			);
 			path = Camera;
@@ -237,6 +249,7 @@
 				524A34F816C9D3A0009588EF /* Default@2x.png in Resources */,
 				524A34FA16C9D3A0009588EF /* Default-568h@2x.png in Resources */,
 				524A34FD16C9D3A0009588EF /* MainStoryboard.storyboard in Resources */,
+				52E852A816D3253A00E6EDA9 /* sample.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +287,7 @@
 				524A34F016C9D3A0009588EF /* main.m in Sources */,
 				524A34F416C9D3A0009588EF /* BYUAppDelegate.m in Sources */,
 				524A350016C9D3A1009588EF /* BYUViewController.m in Sources */,
+				52AF572516CC885E006F3DDB /* CameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +462,7 @@
 				524A351A16C9D3A1009588EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		524A351B16C9D3A1009588EF /* Build configuration list for PBXNativeTarget "CameraTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +471,7 @@
 				524A351D16C9D3A1009588EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
