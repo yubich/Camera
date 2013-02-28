@@ -11,4 +11,6 @@
 @interface CameraViewController : UIViewController
 <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
+@property (nonatomic,retain) UIImagePickerController *imagePickerController;
+
 @end

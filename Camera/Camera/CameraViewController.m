@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 
 @interface CameraViewController ()
+//@property (nonatomic, retain) NSMutableArray *capturedImages;
 
 @end
 
@@ -18,6 +19,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.imagePickerController = [[UIImagePickerController alloc] init];
+        self.imagePickerController.delegate = self;
+        self.imagePickerController.navigationBarHidden = YES;
+        self.imagePickerController.toolbarHidden = YES;
+        self.imagePickerController.wantsFullScreenLayout = YES;
         // Custom initialization
     }
     return self;
@@ -25,6 +31,7 @@
 
 - (void)viewDidLoad
 {
+    NSLog(@"view 2 did load");
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -34,5 +41,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

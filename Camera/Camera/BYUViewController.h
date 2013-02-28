@@ -10,7 +10,17 @@
 #import "CameraViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+
+
 @interface BYUViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-- (IBAction)takePicture:(id)sender;
+- (IBAction) showCamera:(id)sender;
+/*
+- (IBAction) backButton:(id)sender;
+- (IBAction) doneButton:(id)sender;
+- (void) changeFlash:(id)sender;
+*/
+- (void) changeCamera;
+- (void) showLibary;
+- (void) takePicture;
 
 @end
