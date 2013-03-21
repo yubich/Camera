@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "CustomOverlayView.h"
 
 @interface CameraViewController ()
 //@property (nonatomic, retain) NSMutableArray *capturedImages;
@@ -21,9 +22,7 @@
     if (self) {
         self.imagePickerController = [[UIImagePickerController alloc] init];
         self.imagePickerController.delegate = self;
-        self.imagePickerController.navigationBarHidden = YES;
-        self.imagePickerController.toolbarHidden = YES;
-        self.imagePickerController.wantsFullScreenLayout = YES;
+        
         // Custom initialization
     }
     return self;

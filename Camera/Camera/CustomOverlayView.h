@@ -13,11 +13,8 @@
 
 @interface CustomOverlayView : UIView
 
-@property (nonatomic, weak) BYUViewController *delegate;
-@property (nonatomic, weak) UIButton *pictureButton;
-@property (nonatomic, weak) UIButton *flashButton;
-@property (nonatomic, weak) UIButton *changeCameraButton;
-@property (nonatomic, weak) UIButton *lastPicture;
+@property (weak, nonatomic) IBOutlet UISwitch *modeSwitch;
 
+@property (nonatomic, weak) BYUViewController *delegate;
 
 @end

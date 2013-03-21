@@ -17,7 +17,6 @@
 		524A34F616C9D3A0009588EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 524A34F516C9D3A0009588EF /* Default.png */; };
 		524A34F816C9D3A0009588EF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 524A34F716C9D3A0009588EF /* Default@2x.png */; };
 		524A34FA16C9D3A0009588EF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 524A34F916C9D3A0009588EF /* Default-568h@2x.png */; };
-		524A34FD16C9D3A0009588EF /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 524A34FB16C9D3A0009588EF /* MainStoryboard.storyboard */; };
 		524A350016C9D3A1009588EF /* BYUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 524A34FF16C9D3A1009588EF /* BYUViewController.m */; };
 		524A350816C9D3A1009588EF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A350716C9D3A1009588EF /* SenTestingKit.framework */; };
 		524A350916C9D3A1009588EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E316C9D3A0009588EF /* UIKit.framework */; };
@@ -25,6 +24,7 @@
 		524A351216C9D3A1009588EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 524A351016C9D3A1009588EF /* InfoPlist.strings */; };
 		524A351516C9D3A1009588EF /* CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 524A351416C9D3A1009588EF /* CameraTests.m */; };
 		52A5C3B716D4196D009E8B1F /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A5C3B616D4196D009E8B1F /* CameraViewController.m */; };
+		52B357C916F2378100A9EDAB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */; };
 		52C2DB5116CD61BA00FE37EE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */; };
 		52E852A816D3253A00E6EDA9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E852A716D3253A00E6EDA9 /* sample.png */; };
 /* End PBXBuildFile section */
@@ -55,7 +55,6 @@
 		524A34F516C9D3A0009588EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		524A34F716C9D3A0009588EF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		524A34F916C9D3A0009588EF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		524A34FC16C9D3A0009588EF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		524A34FE16C9D3A0009588EF /* BYUViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYUViewController.h; sourceTree = "<group>"; };
 		524A34FF16C9D3A1009588EF /* BYUViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYUViewController.m; sourceTree = "<group>"; };
 		524A350616C9D3A1009588EF /* CameraTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +65,7 @@
 		524A351416C9D3A1009588EF /* CameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraTests.m; sourceTree = "<group>"; };
 		52A5C3B516D4196D009E8B1F /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		52A5C3B616D4196D009E8B1F /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		52B357C816F2378100A9EDAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		52E852A716D3253A00E6EDA9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,7 +135,7 @@
 				5210007116DC5E9700268D97 /* CustomOverlayView.m */,
 				524A34F216C9D3A0009588EF /* BYUAppDelegate.h */,
 				524A34F316C9D3A0009588EF /* BYUAppDelegate.m */,
-				524A34FB16C9D3A0009588EF /* MainStoryboard.storyboard */,
+				52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */,
 				524A34FE16C9D3A0009588EF /* BYUViewController.h */,
 				524A34FF16C9D3A1009588EF /* BYUViewController.m */,
 				52E852A716D3253A00E6EDA9 /* sample.png */,
@@ -253,8 +253,8 @@
 				524A34F616C9D3A0009588EF /* Default.png in Resources */,
 				524A34F816C9D3A0009588EF /* Default@2x.png in Resources */,
 				524A34FA16C9D3A0009588EF /* Default-568h@2x.png in Resources */,
-				524A34FD16C9D3A0009588EF /* MainStoryboard.storyboard in Resources */,
 				52E852A816D3253A00E6EDA9 /* sample.png in Resources */,
+				52B357C916F2378100A9EDAB /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,20 +324,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		524A34FB16C9D3A0009588EF /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				524A34FC16C9D3A0009588EF /* en */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		524A351016C9D3A1009588EF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				524A351116C9D3A1009588EF /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52B357C816F2378100A9EDAB /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

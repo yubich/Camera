@@ -19,8 +19,6 @@
 - (IBAction) doneButton:(id)sender;
 - (void) changeFlash:(id)sender;
 */
-- (void) changeCamera;
-- (void) showLibary;
-- (void) takePicture;
+
 
 @end

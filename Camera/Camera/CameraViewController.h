@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CameraViewController : UIViewController
-<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface CameraViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic,retain) UIImagePickerController *imagePickerController;
 

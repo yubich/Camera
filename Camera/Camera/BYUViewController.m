@@ -37,6 +37,8 @@
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     overlay = [[CustomOverlayView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    overlay.modeSwitch.hidden = YES;
+    //[overlay.modeSwitch isOn];
 }
 
 - (void)viewDidAppear: (BOOL)animated
@@ -66,14 +68,9 @@
         
         //No Editting of the pickture
         self.cameraViewController.imagePickerController.editing = NO;
-        //self.cameraViewController.imagePickerController.showsCameraControls = NO;
+        self.cameraViewController.imagePickerController.showsCameraControls = YES;
         self.cameraViewController.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.cameraViewController.imagePickerController.cameraViewTransform, CAMERA_TRANSFORM_X, CAMERA_TRANSFORM_Y);
-        
-        if(overlay.flashButton.hidden)
-        {
-            overlay.flashButton.hidden = NO;
-        }
-
+       
     }
     else{
         [self.cameraViewController.imagePickerController setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
@@ -100,30 +97,60 @@
     {
         UIImage *seletctedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
         NSLog(@"image picked");
+        if(![overlay.modeSwitch isOn])
+        {
+            NSLog(@"Switch off");
+        }
+        else
+        {
+            NSLog(@"Switch on");
+        }
         image = seletctedImage;
     }
     
     // if the picture is the one we selected (in this case, the first one we took),
     // temperarily store that in an array and hide it.
-    if (self.capturedImages.count == 0)
+    NSInteger count = 0;
+    if ([overlay.modeSwitch isOn])
     {
-        NSLog(@"image stored at 0");
+        count = 0;
         [self.capturedImages addObject:image];
-        //UIImageWriteToSavedPhotosAlbum(self.capturedImages[0], nil, nil, nil);
+        count = count + 1;
+        /*
+        if (self.capturedImages.count == 0)
+        {
+            NSLog(@"image stored at 0");
+            [self.capturedImages addObject:image];
+            //UIImageWriteToSavedPhotosAlbum(self.capturedImages[0], nil, nil, nil);
+        }
+        // when the second one is done, replace it with the previous one.
+        else
+        {
+            [self.capturedImages addObject:image];
+            image = self.capturedImages[self.capturedImages.count-2];
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        }
+         */
     }
-    // when the second one is done, replace it with the previous one.
     else
     {
-        [self.capturedImages addObject:image];
-        image = self.capturedImages[self.capturedImages.count-2];
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        NSLog(@"Case off");
+        if (count != 0)
+        {
+            for(NSInteger n = 0; n < count; n = n+1)
+            {
+                image = self.capturedImages[n];
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+            }
+        }
+        else
+        {
+            NSLog(@"Nothing has been previously stored");
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        }
     }
 }
 
-- (void)takePicture
-{
-    [self.cameraViewController.imagePickerController takePicture];
-}
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -132,19 +159,7 @@
     [self showCamera:self];
 }
 
-- (void)changeCamera
-{
-    if(self.cameraViewController.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront)
-    {
-        self.cameraViewController.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        overlay.flashButton.hidden = NO;
-    }
-    else
-    {
-        self.cameraViewController.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-        overlay.flashButton.hidden = YES;
-    }
-}
+
 
 - (void)showLibary
 {
