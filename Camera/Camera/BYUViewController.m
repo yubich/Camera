@@ -10,37 +10,40 @@
 #define CAMERA_TRANSFORM_Y 1
 
 #import "BYUViewController.h"
-#import "CustomOverlayView.h"
+
 
 @interface BYUViewController ()
 @property (nonatomic, retain) NSMutableArray *capturedImages;
-@property (nonatomic, strong) CameraViewController *cameraViewController;
+@property (nonatomic, strong) UIImagePickerController *cameraViewController;
+@property (nonatomic, retain) UIView *overlay;
+
+@property (retain, nonatomic) UIButton *Flash;
+@property (retain, nonatomic) UIButton *SwitchRear;
+@property (retain, nonatomic) UIBarButtonItem *PhotoAlbum;
+@property (retain, nonatomic) UIBarButtonItem *CameraButton;
+@property (retain, nonatomic) UIToolbar *Toolbar;
+@property (retain, nonatomic) UISwitch *modeSwitch;
 
 @end
 
 @implementation BYUViewController
-{
-    CustomOverlayView *overlay;
-    BOOL didCancel;
-}
 
-@synthesize cameraViewController;
 
 - (void)viewDidLoad
 {
     NSLog(@"view did load");
     [super viewDidLoad];
     self.capturedImages = [NSMutableArray array];
-    self.cameraViewController = [[CameraViewController alloc] init];
+    self.cameraViewController = [[UIImagePickerController alloc] init];
+    
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    overlay = [[CustomOverlayView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
-    overlay.modeSwitch.hidden = YES;
-    //[overlay.modeSwitch isOn];
+    //CGFloat screenWidth = screenRect.size.width;
+    //CGFloat screenHeight = screenRect.size.height;
+    
+    self.overlay = [[UIView alloc] initWithFrame:screenRect];
+    self.overlay.backgroundColor = [UIColor clearColor];
 }
-
 - (void)viewDidAppear: (BOOL)animated
 {
     NSLog(@"view appeared");
@@ -56,35 +59,67 @@
 
 - (IBAction)showCamera:(id)sender {
     
-    self.cameraViewController.imagePickerController = [[UIImagePickerController alloc] init];
+    //self.cameraViewController = [[UIImagePickerController alloc] init];
     
     //if the device has a camera, then take a picture, else pick one from photo library
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    CGFloat height = CGRectGetHeight(self.view.bounds);
+    self.view.backgroundColor = [UIColor clearColor];
+    self.modeSwitch = [[UISwitch alloc] initWithFrame: CGRectMake(243, 260, 79, 27)];
+    self.Toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, height - 47,width, 47)];
+    self.Flash = [[UIButton alloc] initWithFrame:CGRectMake(9, height - height, 81, 32)];
+    [self.Flash addTarget:self action:@selector(Flash:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.SwitchRear = [[UIButton alloc] initWithFrame:CGRectMake(240, 260, 70, 32)];
+    self.CameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(btnCapture:)];
+    self.PhotoAlbum =  [[UIBarButtonItem alloc] initWithTitle:@"Gallery" style:UIBarButtonItemStyleBordered target:self action:@selector(btnLibrary:)];
+    
+    UIBarButtonItem *flexibleSpace1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *flexibleSpace2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIImage *image = [UIImage imageNamed:@"iphone-camera-button.png"];
+    self.CameraButton.image = image;
+    [self.Flash setImage:image forState:UIControlStateNormal];
+    NSArray *items = [NSArray arrayWithObjects: self.PhotoAlbum, flexibleSpace1, self.CameraButton, flexibleSpace2, nil];
+    
+    self.Toolbar.items = items;
+    self.Toolbar.tintColor = [UIColor blackColor];
+    
+    [self.overlay addSubview:self.modeSwitch];
+    [self.overlay addSubview:self.Toolbar];
+    [self.overlay addSubview:self.Flash];
+    [self.overlay addSubview:self.SwitchRear];
+    
+
+    
+    
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        [self.cameraViewController.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeCamera];
         
         //Available both for still images and movies
-        self.cameraViewController.imagePickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+        self.cameraViewController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
         
-        //No Editting of the pickture
-        self.cameraViewController.imagePickerController.editing = NO;
-        self.cameraViewController.imagePickerController.showsCameraControls = YES;
-        self.cameraViewController.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.cameraViewController.imagePickerController.cameraViewTransform, CAMERA_TRANSFORM_X, CAMERA_TRANSFORM_Y);
+        self.cameraViewController.editing = NO;
+        self.cameraViewController.showsCameraControls = NO;
+        self.cameraViewController.navigationBarHidden = YES;
+        self.cameraViewController.toolbarHidden = YES;
+        self.cameraViewController.cameraViewTransform = CGAffineTransformScale(self.cameraViewController.cameraViewTransform, CAMERA_TRANSFORM_X, CAMERA_TRANSFORM_Y);
+        
+        
+        self.cameraViewController.cameraOverlayView = self.overlay;
+        //[self addChildViewController:self.cameraViewController];
        
     }
     else{
-        [self.cameraViewController.imagePickerController setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        [self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
     }
-        [self.cameraViewController.imagePickerController setDelegate:self];
+     
+        //[self.cameraViewController setDelegate:self];
     
-    if(!didCancel)
-    {
-        [self presentViewController:self.cameraViewController.imagePickerController animated:YES completion:nil];
-    }
-    else
-    {
-        didCancel = NO;
-    }
+    [self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    
+    [self presentViewController:self.cameraViewController animated:YES completion:nil];
 }
 
 - (void) imagePickerController: (UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -97,73 +132,33 @@
     {
         UIImage *seletctedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
         NSLog(@"image picked");
-        if(![overlay.modeSwitch isOn])
-        {
-            NSLog(@"Switch off");
-        }
-        else
-        {
-            NSLog(@"Switch on");
-        }
         image = seletctedImage;
     }
     
     // if the picture is the one we selected (in this case, the first one we took),
-    // temperarily store that in an array and hide it.
-    NSInteger count = 0;
-    if ([overlay.modeSwitch isOn])
-    {
-        count = 0;
-        [self.capturedImages addObject:image];
-        count = count + 1;
-        /*
-        if (self.capturedImages.count == 0)
-        {
-            NSLog(@"image stored at 0");
-            [self.capturedImages addObject:image];
-            //UIImageWriteToSavedPhotosAlbum(self.capturedImages[0], nil, nil, nil);
-        }
-        // when the second one is done, replace it with the previous one.
-        else
-        {
-            [self.capturedImages addObject:image];
-            image = self.capturedImages[self.capturedImages.count-2];
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        }
-         */
-    }
-    else
-    {
-        NSLog(@"Case off");
-        if (count != 0)
-        {
-            for(NSInteger n = 0; n < count; n = n+1)
-            {
-                image = self.capturedImages[n];
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-            }
-        }
-        else
-        {
-            NSLog(@"Nothing has been previously stored");
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        }
-    }
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 }
 
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    didCancel = YES;
     NSLog(@"library did cancel");
     [self showCamera:self];
 }
 
-
-
-- (void)showLibary
+- (void)Flash:(id)sender
 {
-    self.cameraViewController.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    if ([self.cameraViewController cameraFlashMode] == -1)
+    {
+        NSLog(@"Flash on");
+        [self.cameraViewController setCameraFlashMode:UIImagePickerControllerCameraFlashModeOn];
+    }
+    else
+    {
+        NSLog(@"Flash off");
+        [self.cameraViewController setCameraFlashMode:UIImagePickerControllerCameraFlashModeOff];
+    }
 }
+
 
 @end

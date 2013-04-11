@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5210007216DC5E9700268D97 /* CustomOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5210007116DC5E9700268D97 /* CustomOverlayView.m */; };
 		524A34E416C9D3A0009588EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E316C9D3A0009588EF /* UIKit.framework */; };
 		524A34E616C9D3A0009588EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E516C9D3A0009588EF /* Foundation.framework */; };
 		524A34E816C9D3A0009588EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E716C9D3A0009588EF /* CoreGraphics.framework */; };
@@ -23,9 +22,9 @@
 		524A350A16C9D3A1009588EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524A34E516C9D3A0009588EF /* Foundation.framework */; };
 		524A351216C9D3A1009588EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 524A351016C9D3A1009588EF /* InfoPlist.strings */; };
 		524A351516C9D3A1009588EF /* CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 524A351416C9D3A1009588EF /* CameraTests.m */; };
-		52A5C3B716D4196D009E8B1F /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A5C3B616D4196D009E8B1F /* CameraViewController.m */; };
 		52B357C916F2378100A9EDAB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */; };
 		52C2DB5116CD61BA00FE37EE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */; };
+		52E84498170D2D30008FB87B /* iphone-camera-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E84497170D2D30008FB87B /* iphone-camera-button.png */; };
 		52E852A816D3253A00E6EDA9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E852A716D3253A00E6EDA9 /* sample.png */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5210007016DC5E9700268D97 /* CustomOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomOverlayView.h; sourceTree = "<group>"; };
-		5210007116DC5E9700268D97 /* CustomOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomOverlayView.m; sourceTree = "<group>"; };
 		524A34DF16C9D3A0009588EF /* Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		524A34E316C9D3A0009588EF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		524A34E516C9D3A0009588EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,10 +60,9 @@
 		524A351116C9D3A1009588EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		524A351316C9D3A1009588EF /* CameraTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraTests.h; sourceTree = "<group>"; };
 		524A351416C9D3A1009588EF /* CameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraTests.m; sourceTree = "<group>"; };
-		52A5C3B516D4196D009E8B1F /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		52A5C3B616D4196D009E8B1F /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		52B357C816F2378100A9EDAB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		52E84497170D2D30008FB87B /* iphone-camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-camera-button.png"; sourceTree = "<group>"; };
 		52E852A716D3253A00E6EDA9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,10 +125,7 @@
 		524A34E916C9D3A0009588EF /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				52A5C3B516D4196D009E8B1F /* CameraViewController.h */,
-				52A5C3B616D4196D009E8B1F /* CameraViewController.m */,
-				5210007016DC5E9700268D97 /* CustomOverlayView.h */,
-				5210007116DC5E9700268D97 /* CustomOverlayView.m */,
+				52E84497170D2D30008FB87B /* iphone-camera-button.png */,
 				524A34F216C9D3A0009588EF /* BYUAppDelegate.h */,
 				524A34F316C9D3A0009588EF /* BYUAppDelegate.m */,
 				52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */,
@@ -255,6 +248,7 @@
 				524A34FA16C9D3A0009588EF /* Default-568h@2x.png in Resources */,
 				52E852A816D3253A00E6EDA9 /* sample.png in Resources */,
 				52B357C916F2378100A9EDAB /* MainStoryboard.storyboard in Resources */,
+				52E84498170D2D30008FB87B /* iphone-camera-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,8 +286,6 @@
 				524A34F016C9D3A0009588EF /* main.m in Sources */,
 				524A34F416C9D3A0009588EF /* BYUAppDelegate.m in Sources */,
 				524A350016C9D3A1009588EF /* BYUViewController.m in Sources */,
-				52A5C3B716D4196D009E8B1F /* CameraViewController.m in Sources */,
-				5210007216DC5E9700268D97 /* CustomOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
