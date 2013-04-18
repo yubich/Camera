@@ -16,6 +16,10 @@
 @interface BYUViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 - (IBAction) showCamera:(id)sender;
 - (void) Flash:(id)sender;
+- (void) Capture:(id)sender;
+- (void) SwitchCamera:(id)sender;
+- (void) modeSwitch:(id)sender;
+- (void) Library:(id)sender;
 /*
 - (IBAction) backButton:(id)sender;
 - (IBAction) doneButton:(id)sender;
