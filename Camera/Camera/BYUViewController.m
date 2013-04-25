@@ -35,6 +35,7 @@
     [super viewDidLoad];
     self.capturedImages = [NSMutableArray array];
     self.cameraViewController = [[UIImagePickerController alloc] init];
+    self.capturedImages = [[NSMutableArray alloc] init];
     
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -88,12 +89,13 @@
     [self.overlay addSubview:self.modeSwitch];
     [self.overlay addSubview:self.Toolbar];
     [self.overlay addSubview:self.Flash];
-    [self.overlay addSubview:self.SwitchRear];
-    
+    [self.overlay addSubview:self.SwitchRear];    
     
 }
 - (void)viewDidAppear: (BOOL)animated
 {
+    NSLog(@"viewDidAppear");
+    
     [self showCamera:self];
 }
 
@@ -112,23 +114,28 @@
         //Available both for still images and movies
         self.cameraViewController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
         
-        self.cameraViewController.editing = NO;
+        self.cameraViewController.allowsEditing = YES;
         self.cameraViewController.showsCameraControls = NO;
         self.cameraViewController.navigationBarHidden = YES;
         self.cameraViewController.toolbarHidden = YES;
         self.cameraViewController.cameraViewTransform = CGAffineTransformScale(self.cameraViewController.cameraViewTransform, CAMERA_TRANSFORM_X, CAMERA_TRANSFORM_Y);
         
-
+        // set the overlay view
         self.cameraViewController.cameraOverlayView = self.overlay;
+        
+        // set the default flashMode to be on
+        [self.cameraViewController setCameraFlashMode:UIImagePickerControllerCameraFlashModeOn];
         
         //[self addChildViewController:self.cameraViewController];
        
     }
-    else{
+    else
+    {
         [self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
     }
-     
-    [self.cameraViewController setDelegate:self];
+    
+    self.cameraViewController.delegate = self;
+    //[self.cameraViewController setDelegate:self];
     
     [self presentViewController:self.cameraViewController animated:YES completion:nil];
 }
@@ -136,25 +143,58 @@
 - (void) imagePickerController: (UIImagePickerController *) picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
-    UIImage *image = [UIImage imageNamed:@"sample.png"];
+    //UIImage *image = [UIImage imageNamed:@"sample.png"];
     
     
     if(CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
     {
-        UIImage *seletctedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
+        if(self.cameraViewController.editing)
+        {
+            NSLog(@"Editing mode");
+            UIImage *selectedImage = (UIImage *) [info objectForKey: UIImagePickerControllerEditedImage];
+            if(!self.modeSwitch.selected)
+            {
+                [self.capturedImages addObject:selectedImage];
+            }
+            else
+            {
+                for (NSInteger n = 0;n < [self.capturedImages count]; n = n+1)
+                {
+                    UIImageWriteToSavedPhotosAlbum(self.capturedImages[n], nil, nil, nil);
+                }
+                NSLog(@"pic is saved");
+            }
+        }
+        else
+        {
+            NSLog(@"Normal mode");
+            UIImage *selectedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
+            if(!self.modeSwitch.selected)
+            {
+                [self.capturedImages addObject:selectedImage];
+            }
+            else
+            {
+                for (NSInteger n = 0;n < [self.capturedImages count]; n = n+1)
+                {
+                    UIImageWriteToSavedPhotosAlbum(self.capturedImages[n], nil, nil, nil);
+                }
+                NSLog(@"pic is saved");
+            }
+        }
         NSLog(@"image picked");
-        image = seletctedImage;
+        //image = seletctedImage;
+        
+        
+
     }
-    
-    NSLog(@"pic is saved");
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 }
 
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     NSLog(@"library did cancel");
-    [self showCamera:self];
+    [UIView transitionWithView:self.cameraViewController.view duration:1.0 options:UIViewAnimationOptionTransitionCurlDown animations:^{[self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeCamera];} completion:nil];
 }
 
 - (void)Flash:(id)sender
@@ -174,8 +214,8 @@
 
 - (void)Capture:(id)sender
 {
-    NSLog(@"a picture was captured");
     [self.cameraViewController takePicture];
+    NSLog(@"a picture was captured");
 }
 
 - (void)SwitchCamera:(id)sender
@@ -197,7 +237,15 @@
 
 - (void)modeSwitch:(id)sender
 {
-    NSLog(@"I am here");
+    if(self.modeSwitch.selected)
+    {
+        NSLog(@"I am selected");
+    }
+    else
+    {
+        NSLog(@"I am not selected");
+    }
+        
     self.modeSwitch.selected = !self.modeSwitch.selected;
 }
 
