@@ -23,6 +23,9 @@
 @property (retain, nonatomic) UIBarButtonItem *CameraButton;
 @property (retain, nonatomic) UIToolbar *Toolbar;
 @property (retain, nonatomic) UIButton *modeSwitch;
+@property (retain, nonatomic) UIButton *hide;
+
+@property (retain, nonatomic) PreViewController *preViewController;
 
 @end
 
@@ -55,6 +58,13 @@
     self.modeSwitch.frame = CGRectMake(width/2-40, 0, 79, 27);
     //[self.modeSwitch setImage:[UIImage imageNamed:@"gear_64.png"] forState:UIControlStateNormal];
     [self.modeSwitch addTarget:self action:@selector(modeSwitch:) forControlEvents:UIControlEventTouchUpInside];
+    self.modeSwitch.selected = NO;
+    
+    // hide button
+    self.hide = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.hide.frame = CGRectMake(width-60, height/2-30, 60, 60);
+    [self.hide addTarget:self action:@selector(hidePic:) forControlEvents:UIControlEventTouchUpInside];
+    self.hide.selected = YES;
     
     // Flash button
     self.Flash = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -71,25 +81,25 @@
     [self.SwitchRear setTitle:@"Front" forState:UIControlStateSelected];
     [self.SwitchRear addTarget:self action:@selector(SwitchCamera:) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    // configuring the toolbar
     self.CameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(Capture:)];
     self.PhotoAlbum =  [[UIBarButtonItem alloc] initWithTitle:@"Gallery" style:UIBarButtonItemStyleBordered target:self action:@selector(Library:)];
     
     UIBarButtonItem *flexibleSpace1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *flexibleSpace2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    UIImage *image = [UIImage imageNamed:@"iphone-camera-button.png"];
-    self.CameraButton.image = image;
-    //[self.Flash setImage:image forState:UIControlStateNormal];
     NSArray *items = [NSArray arrayWithObjects: self.PhotoAlbum, flexibleSpace1, self.CameraButton, flexibleSpace2, nil];
     
     self.Toolbar.items = items;
     self.Toolbar.tintColor = [UIColor blackColor];
     
+    // adding everything to the view
     [self.overlay addSubview:self.modeSwitch];
     [self.overlay addSubview:self.Toolbar];
     [self.overlay addSubview:self.Flash];
-    [self.overlay addSubview:self.SwitchRear];    
+    [self.overlay addSubview:self.SwitchRear];
+    [self.overlay addSubview:self.hide];
+    
+    //self.preViewController = [[PreViewController alloc] init];
     
 }
 - (void)viewDidAppear: (BOOL)animated
@@ -114,6 +124,7 @@
         //Available both for still images and movies
         self.cameraViewController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
         
+        // change default settings
         self.cameraViewController.allowsEditing = YES;
         self.cameraViewController.showsCameraControls = NO;
         self.cameraViewController.navigationBarHidden = YES;
@@ -148,30 +159,30 @@
     
     if(CFStringCompare((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo)
     {
-        if(self.cameraViewController.editing)
+        UIImage *selectedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
+        
+        /*
+        if(self.cameraViewController.sourceType != UIImagePickerControllerSourceTypeCamera)
         {
-            NSLog(@"Editing mode");
-            UIImage *selectedImage = (UIImage *) [info objectForKey: UIImagePickerControllerEditedImage];
-            if(!self.modeSwitch.selected)
-            {
-                [self.capturedImages addObject:selectedImage];
-            }
-            else
-            {
-                for (NSInteger n = 0;n < [self.capturedImages count]; n = n+1)
-                {
-                    UIImageWriteToSavedPhotosAlbum(self.capturedImages[n], nil, nil, nil);
-                }
-                NSLog(@"pic is saved");
-            }
+            [self.preViewController.picView setImage:selectedImage];
+            [self.cameraViewController presentViewController:self.preViewController animated:YES completion:nil];
+            NSLog(@"shift to preViewController");
+            return;
+        }
+        */
+        
+        // when hidden mode is on, store pics into capturedImages array
+        if(self.hide.selected)
+        {
+            [self.capturedImages addObject:selectedImage];
+            NSLog(@"pic is hidden");
         }
         else
         {
-            NSLog(@"Normal mode");
-            UIImage *selectedImage = (UIImage *) [info objectForKey: UIImagePickerControllerOriginalImage];
             if(!self.modeSwitch.selected)
             {
-                [self.capturedImages addObject:selectedImage];
+                UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
+                NSLog(@"pic is saved");
             }
             else
             {
@@ -179,14 +190,13 @@
                 {
                     UIImageWriteToSavedPhotosAlbum(self.capturedImages[n], nil, nil, nil);
                 }
-                NSLog(@"pic is saved");
+                [self.capturedImages removeAllObjects];
             }
+            //NSLog(@"pic is saved");
         }
+        
         NSLog(@"image picked");
         //image = seletctedImage;
-        
-        
-
     }
 }
 
@@ -194,9 +204,12 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     NSLog(@"library did cancel");
+    self.SwitchRear.selected = NO;
+    self.Flash.selected = NO;
     [UIView transitionWithView:self.cameraViewController.view duration:1.0 options:UIViewAnimationOptionTransitionCurlDown animations:^{[self.cameraViewController setSourceType:UIImagePickerControllerSourceTypeCamera];} completion:nil];
 }
 
+// flashlight 
 - (void)Flash:(id)sender
 {
     self.Flash.selected = !self.Flash.selected;
@@ -212,17 +225,20 @@
     }
 }
 
+// function of capturing pics
 - (void)Capture:(id)sender
 {
     [self.cameraViewController takePicture];
     NSLog(@"a picture was captured");
 }
 
+// switch camera device
 - (void)SwitchCamera:(id)sender
 {
     self.SwitchRear.selected = !self.SwitchRear.selected;
     if(self.cameraViewController.cameraDevice == UIImagePickerControllerCameraDeviceRear)
     {
+        // animation when change the view
         [UIView transitionWithView:self.cameraViewController.view duration:0.7 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{self.cameraViewController.cameraDevice = UIImagePickerControllerCameraDeviceFront;} completion:nil];
         //self.cameraViewController.cameraDevice = UIImagePickerControllerCameraDeviceFront
     }
@@ -237,6 +253,8 @@
 
 - (void)modeSwitch:(id)sender
 {
+    self.modeSwitch.selected = !self.modeSwitch.selected;
+    
     if(self.modeSwitch.selected)
     {
         NSLog(@"I am selected");
@@ -245,13 +263,26 @@
     {
         NSLog(@"I am not selected");
     }
-        
-    self.modeSwitch.selected = !self.modeSwitch.selected;
 }
 
 - (void)Library:(id)sender
 {
     [UIView transitionWithView:self.cameraViewController.view duration:1.0 options:UIViewAnimationOptionTransitionCurlUp animations:^{[self.cameraViewController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];} completion:nil];
+}
+
+// function of hiding pics
+- (void) hidePic:(id)sender
+{
+    self.hide.selected = !self.hide.selected;
+    
+    if(self.hide.selected)
+    {
+        NSLog(@"hidden mode");
+    }
+    else
+    {
+        NSLog(@"normal mode");
+    }
 }
 
 @end

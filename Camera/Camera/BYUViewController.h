@@ -10,8 +10,7 @@
 
 
 #import <MobileCoreServices/MobileCoreServices.h>
-
-
+#import "PreViewController.h"
 
 @interface BYUViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 - (IBAction) showCamera:(id)sender;
@@ -20,6 +19,7 @@
 - (void) SwitchCamera:(id)sender;
 - (void) modeSwitch:(id)sender;
 - (void) Library:(id)sender;
+- (void) hidePic:(id)sender;
 /*
 - (IBAction) backButton:(id)sender;
 - (IBAction) doneButton:(id)sender;

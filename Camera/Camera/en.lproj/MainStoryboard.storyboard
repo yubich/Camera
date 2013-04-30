@@ -12,6 +12,39 @@
             </objects>
             <point key="canvasLocation" x="113" y="-150"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="yFJ-u2-an9">
+            <objects>
+                <viewController id="EWb-kr-0o7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="naA-Ww-UgA">
+                        <rect key="frame" x="0.0" y="20" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1x-r9-Pkr"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-nh-VSu">
+                                <items>
+                                    <barButtonItem style="done" systemItem="camera" id="9oK-T6-Ycc"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QDJ-nh-VSu" firstAttribute="leading" secondItem="naA-Ww-UgA" secondAttribute="leading" type="default" id="21v-hL-7ht"/>
+                            <constraint firstItem="i1x-r9-Pkr" firstAttribute="bottom" secondItem="naA-Ww-UgA" secondAttribute="bottom" type="default" id="3LX-gw-Vop"/>
+                            <constraint firstItem="i1x-r9-Pkr" firstAttribute="top" secondItem="naA-Ww-UgA" secondAttribute="top" type="default" id="DQ9-tJ-nc3"/>
+                            <constraint firstItem="QDJ-nh-VSu" firstAttribute="top" secondItem="naA-Ww-UgA" secondAttribute="top" type="default" id="FnR-yw-c9y"/>
+                            <constraint firstItem="i1x-r9-Pkr" firstAttribute="trailing" secondItem="naA-Ww-UgA" secondAttribute="trailing" type="default" id="KMH-WK-qak"/>
+                            <constraint firstItem="QDJ-nh-VSu" firstAttribute="trailing" secondItem="naA-Ww-UgA" secondAttribute="trailing" type="default" id="dnR-fk-Gxf"/>
+                            <constraint firstItem="i1x-r9-Pkr" firstAttribute="leading" secondItem="naA-Ww-UgA" secondAttribute="leading" type="default" id="soc-MH-1Wu"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1G-DR-9Ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="575" y="-141"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

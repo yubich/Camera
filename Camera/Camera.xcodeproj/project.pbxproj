@@ -29,6 +29,7 @@
 		52C2DB5116CD61BA00FE37EE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */; };
 		52E84498170D2D30008FB87B /* iphone-camera-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E84497170D2D30008FB87B /* iphone-camera-button.png */; };
 		52E852A816D3253A00E6EDA9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E852A716D3253A00E6EDA9 /* sample.png */; };
+		52F054AB172A165F00B85147 /* PreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F054AA172A165F00B85147 /* PreViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		52C2DB5016CD61BA00FE37EE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		52E84497170D2D30008FB87B /* iphone-camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-camera-button.png"; sourceTree = "<group>"; };
 		52E852A716D3253A00E6EDA9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
+		52F054A9172A165F00B85147 /* PreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreViewController.h; sourceTree = "<group>"; };
+		52F054AA172A165F00B85147 /* PreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				52B357C716F2378100A9EDAB /* MainStoryboard.storyboard */,
 				524A34FE16C9D3A0009588EF /* BYUViewController.h */,
 				524A34FF16C9D3A1009588EF /* BYUViewController.m */,
+				52F054A9172A165F00B85147 /* PreViewController.h */,
+				52F054AA172A165F00B85147 /* PreViewController.m */,
 				52E852A716D3253A00E6EDA9 /* sample.png */,
 				524A34EA16C9D3A0009588EF /* Supporting Files */,
 			);
@@ -298,6 +303,7 @@
 				524A34F016C9D3A0009588EF /* main.m in Sources */,
 				524A34F416C9D3A0009588EF /* BYUAppDelegate.m in Sources */,
 				524A350016C9D3A1009588EF /* BYUViewController.m in Sources */,
+				52F054AB172A165F00B85147 /* PreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
